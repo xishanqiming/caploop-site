@@ -1,0 +1,4 @@
+{ "members": [
+  {"name":"姓名A","role":"投资管理","tags":["PE/VC","Europe"]},
+  {"name":"姓名B","role":"估值建模","tags":["Big4","Finance"]}
+]}

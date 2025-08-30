@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* === Brand Tokens === */
+:root{
+  --container: 1120px;
+  --radius: 16px;
+  --shadow: 0 20px 40px -20px rgba(15,23,42,.18);
+  --brand-50:  200 100% 97%;
+  --brand-100: 199 87% 93%;
+  --brand-200: 200 90% 86%;
+  --brand-500: 202 83% 56%;
+  --brand-600: 203 79% 48%;
+  --accent-500: 156 72% 41%;
+  --accent-600: 156 80% 34%;
+}
+
+/* 基础布局 */
+html { scroll-behavior: smooth; }
+body { @apply antialiased text-gray-900; }
+.container { @apply mx-auto px-4; max-width: var(--container); }
+.section { @apply py-16 md:py-24; }
+.section-title { @apply text-3xl md:text-4xl font-semibold tracking-tight text-gray-900; }
+.section-sub { @apply text-gray-600 mt-3 md:mt-4; }
+
+/* 组件化工具类 */
+.card { @apply border border-gray-100 bg-white; border-radius: var(--radius); box-shadow: var(--shadow); }
+
+.btn { @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition; }
+.btn-primary { @apply text-white border border-transparent; background: linear-gradient(135deg, hsl(var(--brand-600)), hsl(var(--accent-600))); }
+.btn-primary:hover { filter: brightness(1.05); }
+.btn-ghost   { @apply text-gray-800 bg-white border border-gray-200 hover:bg-gray-50; }
+.btn-outline { @apply text-gray-900 bg-transparent border border-gray-300 hover:bg-gray-50; }
+
+.badge { @apply inline-flex items-center gap-2 text-xs font-medium px-2.5 py-1 rounded-lg; background: linear-gradient(135deg, hsl(var(--brand-100)), hsl(var(--brand-50))); color: hsl(var(--brand-600)); }
+
+.hero-grad {
+  background: radial-gradient(1200px 600px at 10% -10%, hsl(var(--brand-50)), transparent 60%),
+              radial-gradient(900px 500px at 100% 0%, hsl(var(--accent-500) / .08), transparent 40%);
+}
+.highlight {
+  background-image: linear-gradient(90deg, hsl(var(--brand-600)), hsl(var(--accent-600)));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Prose 微调 */
+.prose :where(a){ @apply text-gray-900 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-500; }
