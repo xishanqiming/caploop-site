@@ -1,0 +1,13 @@
+name = "caploop-site"
+pages_build_output_dir = ".vercel/output/static"
+
+[vars]
+# 把运行时需要的环境变量（如邮件服务）加在这里或在 Cloudflare Dashboard 里配置
+# RESEND_API_KEY = "xxxx"
+
+[observability]
+enabled = false
+
+# Worker/Pages Functions 运行时配置（保持默认即可）
+compatibility_date = "2024-12-01"
+compatibility_flags = []
