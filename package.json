@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
+    "@prisma/client": "^6.15.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.542.0",
@@ -31,6 +32,7 @@
     "eslint-config-next": "15.5.0",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.6.2",
+    "prisma": "^6.15.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

@@ -1,5 +1,4 @@
 import Hero from "./(sections)/hero/Hero";
-import HashScroll from "@/components/HashScroll";
 import Ecosystem from "./(sections)/ecosystem/Ecosystem";
 import Structure from "./(sections)/structure/Structure";
 import Usp from "./(sections)/usp/Usp";
@@ -11,7 +10,6 @@ import Contact from "./(sections)/contact/Contact";
 export default function Page() {
   return (
     <main>
-      <HashScroll />
       <div className="bg-white"><Hero /></div>
       <div className="bg-gray-50"><Ecosystem /></div>
       <div className="bg-white"><Structure /></div>

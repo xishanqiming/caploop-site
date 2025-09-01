@@ -6,7 +6,7 @@ export default function Ecosystem(){
   return (
     <Section id="ecosystem" title="What is Tokenization?" center subtitle="将现实世界资产转化为可在区块链上流通的数字权益，提升流动性、透明度与可接入的投资者范围。">
       <div className="mt-10 grid md:grid-cols-2 gap-8 items-start">
-        <Card className="p-6 space-y-4">
+        <Card className="card p-6 space-y-4">
           <div className="flex items-center gap-3">
             <Blocks className="text-[hsl(var(--brand-600))]" />
             <div className="font-semibold">Digital Asset Representation</div>
@@ -28,7 +28,7 @@ export default function Ecosystem(){
           <p className="text-gray-600 text-sm">链上可验证记录，最小化对手方风险与信息不对称。</p>
         </Card>
 
-        <Card className="p-6">
+        <Card className="card p-6">
           <div className="font-semibold">Tokenization Benefits for SMEs</div>
           <ul className="mt-4 space-y-2 text-gray-700">
             {[
@@ -39,7 +39,7 @@ export default function Ecosystem(){
               "资产使用效率提升"
             ].map((x, i)=>(
               <li key={i} className="flex items-start gap-2">
-                <Check className="mt-1 size-4 text-[hsl(var(--brand-600))]" />
+                <Check className="mt-1 size-5 text-[hsl(var(--brand-600))]" />
                 <span>{x}</span>
               </li>
             ))}

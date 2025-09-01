@@ -25,7 +25,7 @@ body { @apply antialiased text-gray-900; }
 /* 组件化工具类 */
 .card { @apply border border-gray-100 bg-white; border-radius: var(--radius); box-shadow: var(--shadow); }
 
-.btn { @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-[15px] font-medium transition; }
+.btn { @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition; }
 .btn-primary { @apply text-white border border-transparent; background: linear-gradient(135deg, hsl(var(--brand-600)), hsl(var(--accent-600))); }
 .btn-primary:hover { filter: brightness(1.05); }
 .btn-ghost   { @apply text-gray-800 bg-white border border-gray-200 hover:bg-gray-50; }
@@ -89,25 +89,3 @@ h1{
 
 /* 主容器最大宽度 */
 .container{ max-width: 1200px; }
-
-/* === Caploop UI enhancements === */
-:root{
-  /* 更鲜明的品牌色（蓝-青渐层用到）*/
-  --brand-600: 214 100% 45%;
-  --brand-500: 214 100% 55%;
-  --accent-600: 184 85% 40%;
-}
-
-/* 大号胶囊按钮 */
-.btn.btn-lg{ @apply px-6 py-3 text-[16px] md:px-7 md:py-3.5 md:text-[17px]; }
-
-/* 描边按钮（下载/次级CTA更清爽） */
-.btn-outline{
-  @apply bg-transparent border border-gray-300 text-gray-800 hover:bg-gray-50;
-}
-
-/* 更显眼的小徽标 */
-.badge{ @apply text-[12px] md:text-[13px] px-3 py-1.5 rounded-full; }
-
-/* 通用卡片轻阴影 */
-.card{ @apply rounded-2xl border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.05)] bg-white; }
