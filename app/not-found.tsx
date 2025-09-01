@@ -1,10 +1,20 @@
+import Link from "next/link";
+
 export default function NotFound() {
   return (
-    <main className="section">
-      <div className="container text-center">
-        <h1 className="text-3xl font-semibold">页面不存在</h1>
-        <p className="text-gray-600 mt-3">请检查链接或返回首页。</p>
-        <a className="btn btn-primary mt-6" href="/">返回首页</a>
+    <main style={{ padding: 24, fontFamily: "system-ui, -apple-system, Segoe UI, Roboto" }}>
+      <h1>404 · Page not found</h1>
+      <p style={{ color: "#666" }}>The page you’re looking for doesn’t exist.</p>
+      <div style={{ marginTop: 16 }}>
+        <Link href="/" style={{
+          display: "inline-flex",
+          padding: "8px 12px",
+          borderRadius: 12,
+          border: "1px solid #e5e7eb",
+          textDecoration: "none"
+        }}>
+          ← Back to Home
+        </Link>
       </div>
     </main>
   );

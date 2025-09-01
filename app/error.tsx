@@ -1,13 +1,23 @@
 "use client";
+import Link from "next/link";
+
 export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
+  console.error(error);
   return (
     <html>
-      <body className="section">
-        <div className="container text-center">
-          <h1 className="text-3xl font-semibold">出错了</h1>
-          <p className="text-gray-600 mt-3">发生了意外错误，请稍后再试。</p>
-          <pre className="mt-4 text-xs text-gray-400">{error?.message}</pre>
-          <a className="btn btn-primary mt-6" href="/">返回首页</a>
+      <body style={{ padding: 24, fontFamily: "system-ui, -apple-system, Segoe UI, Roboto" }}>
+        <h1>Something went wrong</h1>
+        <p style={{ color: "#666" }}>We hit an unexpected error. Please try again.</p>
+        <div style={{ marginTop: 16 }}>
+          <Link href="/" style={{
+            display: "inline-flex",
+            padding: "8px 12px",
+            borderRadius: 12,
+            border: "1px solid #e5e7eb",
+            textDecoration: "none"
+          }}>
+            ← Back to Home
+          </Link>
         </div>
       </body>
     </html>
