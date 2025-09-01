@@ -1,24 +1,13 @@
-"use client";
+'use client';
+import Link from 'next/link';
 
-import Link from "next/link";
-
-export default function GlobalError({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function GlobalError() {
   return (
     <html>
-      <body style={{ padding: 24, fontFamily: "system-ui, -apple-system, Segoe UI, Roboto" }}>
-        <h2>Something went wrong.</h2>
-        <pre style={{ whiteSpace: "pre-wrap", color: "#666" }}>{error?.message}</pre>
-        <div style={{ display: "flex", gap: 12 }}>
-          <button onClick={() => reset()}>Try again</button>
-          <Link href="/" prefetch>
-            Back to Home
-          </Link>
+      <body className="min-h-screen grid place-items-center">
+        <div className="text-center space-y-4">
+          <h1 className="text-2xl font-semibold">Something went wrong</h1>
+          <Link href="/" className="btn">Back to Home</Link>
         </div>
       </body>
     </html>

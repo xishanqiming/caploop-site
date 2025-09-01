@@ -1,95 +1,75 @@
-export const runtime = 'edge';            // ✅ 让 Cloudflare Pages 识别为 Edge 路由
-export const dynamic = 'force-dynamic';   // 可选：避免被静态化
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+export const preferredRegion = 'auto';
 
-type ContactPayload = {
-  role: 'founder' | 'investor' | 'partner' | 'other';
-  name: string;
-  email: string;
-  message?: string;
-};
+import { z } from 'zod';
+
+const schema = z.object({
+  role: z.string().min(1),
+  name: z.string().min(1),
+  email: z.string().email(),
+  message: z.string().min(1),
+});
+
+function escapeHtml(str: string) {
+  return str.replace(/[&<>"']/g, (ch) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]!)
+  );
+}
 
 export async function POST(req: Request) {
   try {
-    const body = (await req.json()) as ContactPayload;
+    const body = await req.json();
+    const data = schema.parse(body);
 
-    // 简单校验
-    if (!body?.name || !body?.email) {
-      return new Response(JSON.stringify({ ok: false, error: 'Missing name or email' }), {
-        status: 400,
-        headers: { 'content-type': 'application/json; charset=utf-8' },
-      });
-    }
-
-    // 从环境变量读取（Cloudflare Pages / Vercel 都支持）
     const apiKey = process.env.RESEND_API_KEY;
-    const to = process.env.RESEND_TO || 'info@caploop.lu';
-    const from = process.env.RESEND_FROM || 'Caploop <noreply@caploop.org>';
-
     if (!apiKey) {
-      // 构建或预览环境没配 key 时，直接吞掉但返回 200，避免构建失败
-      console.warn('RESEND_API_KEY is not set, skipping email send.');
-      return new Response(JSON.stringify({ ok: true, skipped: true }), {
-        status: 200,
-        headers: { 'content-type': 'application/json; charset=utf-8' },
-      });
+      return new Response(
+        JSON.stringify({ ok: false, error: 'Missing RESEND_API_KEY' }),
+        { status: 500, headers: { 'content-type': 'application/json' } }
+      );
     }
 
-    // 发送邮件（Resend HTTP API）
-    const subject = `【Caploop 联系表单】${body.role || '未知身份'} - ${body.name}`;
-    const html = `
-      <div>
-        <h3>Caploop 联系表单</h3>
-        <ul>
-          <li><b>身份/角色</b>：${escapeHtml(body.role || '')}</li>
-          <li><b>姓名</b>：${escapeHtml(body.name)}</li>
-          <li><b>邮箱</b>：${escapeHtml(body.email)}</li>
-        </ul>
-        <p><b>留言</b>：</p>
-        <pre style="white-space:pre-wrap;font-family:ui-monospace,Menlo,Consolas,monospace;">${escapeHtml(body.message || '')}</pre>
-      </div>
-    `;
+    const payload = {
+      from: 'Caploop <no-reply@caploop.org>',          // ASCII，避免 Workers ByteString 限制
+      to: ['info@caploop.lu'],
+      subject: `New Contact · ${data.role} · ${data.name}`,
+      reply_to: data.email,
+      html: `
+        <h3>New Contact</h3>
+        <p><b>Role:</b> ${escapeHtml(data.role)}</p>
+        <p><b>Name:</b> ${escapeHtml(data.name)}</p>
+        <p><b>Email:</b> ${escapeHtml(data.email)}</p>
+        <p><b>Message:</b><br/>${escapeHtml(data.message).replace(/\n/g, '<br/>')}</p>
+      `,
+    };
 
-    const resp = await fetch('https://api.resend.com/emails', {
+    const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        from,
-        to,
-        subject,
-        html,
-      }),
+      body: JSON.stringify(payload),
     });
 
-    if (!resp.ok) {
-      const text = await resp.text();
-      return new Response(JSON.stringify({ ok: false, error: 'Resend error', detail: text }), {
-        status: 502,
-        headers: { 'content-type': 'application/json; charset=utf-8' },
-      });
+    if (!r.ok) {
+      const detail = await r.text();
+      return new Response(
+        JSON.stringify({ ok: false, error: 'Resend error', detail }),
+        { status: 502, headers: { 'content-type': 'application/json' } }
+      );
     }
 
-    const data = await resp.json();
-    return new Response(JSON.stringify({ ok: true, id: data?.id }), {
+    return new Response(JSON.stringify({ ok: true }), {
       status: 200,
-      headers: { 'content-type': 'application/json; charset=utf-8' },
+      headers: { 'content-type': 'application/json' },
     });
-  } catch (err) {
-    return new Response(JSON.stringify({ ok: false, error: String(err) }), {
-      status: 500,
-      headers: { 'content-type': 'application/json; charset=utf-8' },
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : 'Unknown error';
+    return new Response(JSON.stringify({ ok: false, error: msg }), {
+      status: 400,
+      headers: { 'content-type': 'application/json' },
     });
   }
-}
-
-// —— Edge 环境下的最小 escape 实现，避免 HTML 注入 —— //
-function escapeHtml(input: string) {
-  return input
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
 }
