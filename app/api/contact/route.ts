@@ -1,40 +1,41 @@
-
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { z } from "zod";
 
-const ContactSchema = z.object({
-  role: z.string().optional(),
-  name: z.string().min(1).max(100),
-  email: z.string().email(),
-  message: z.string().min(1).max(5000),
-});
+const apiKey = process.env.RESEND_API_KEY;
+const resend = apiKey ? new Resend(apiKey) : null;
 
-const resend = new Resend(process.env.RESEND_API_KEY ?? "");
+type ContactPayload = {
+  name: string;
+  email: string;
+  role: string;
+  message: string;
+};
 
 export async function POST(req: Request) {
   try {
-    const json = await req.json();
-    const data = ContactSchema.parse(json);
+    const body = (await req.json()) as ContactPayload;
 
-    if (!process.env.RESEND_API_KEY) {
-      // 本地/未配置密钥时，直接返回成功；避免 500 阻断
-      return NextResponse.json({ ok: true, dryRun: true });
+    // 基础校验
+    if (!body?.email || !body?.name) {
+      return NextResponse.json({ ok: false, error: "Missing name or email" }, { status: 400 });
     }
 
+    // 如果没有配置邮件服务密钥，则直接“假发送”，保证构建/预览环境通过
+    if (!resend) {
+      return NextResponse.json({ ok: true, preview: true });
+    }
+
+    // 真的发送（你可按需调整收件人、模板）
     await resend.emails.send({
       from: "Caploop <noreply@caploop.org>",
       to: ["info@caploop.lu"],
-      subject: `Contact · ${data.role ?? "Unknown"} · ${data.name}`,
-      text: `From: ${data.name} <${data.email}>\nRole: ${data.role ?? "-"}\n\n${data.message}`,
+      subject: `New Contact: ${body.name} (${body.role || "N/A"})`,
+      text: `Email: ${body.email}\n\nMessage:\n${body.message || ""}`,
     });
 
     return NextResponse.json({ ok: true });
-  } catch (err) {
-    // zod 或 resend 错误
-    return NextResponse.json(
-      { ok: false, error: err instanceof Error ? err.message : "Unknown error" },
-      { status: 400 }
-    );
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "Unknown error";
+    return NextResponse.json({ ok: false, error: msg }, { status: 500 });
   }
 }

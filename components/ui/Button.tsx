@@ -1,27 +1,40 @@
 import * as React from "react";
 import clsx from "clsx";
 
-type Variant = "primary" | "outline" | "ghost";
-type Size = "sm" | "md" | "lg";
-
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: Variant;
-  size?: Size;
+  asChild?: false;
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
 };
 
-const base =
-  "inline-flex items-center justify-center rounded-full border transition active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2";
-const variants: Record<Variant, string> = {
-  primary: "bg-[hsl(var(--brand-600))] text-white border-[hsl(var(--brand-600))] hover:opacity-90",
-  outline: "bg-white text-gray-900 border-gray-200 hover:bg-gray-50",
-  ghost: "bg-transparent text-gray-700 border-transparent hover:bg-gray-50",
-};
-const sizes: Record<Size, string> = {
-  sm: "text-sm px-3 py-1.5",
-  md: "text-base px-4 py-2",
-  lg: "text-base md:text-lg px-5 py-2.5",
+const variantMap: Record<NonNullable<ButtonProps["variant"]>, string> = {
+  primary: "bg-[hsl(var(--brand-600))] text-white hover:brightness-95",
+  secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200",
+  ghost: "bg-transparent hover:bg-gray-100",
 };
 
-export function Button({ className, variant = "primary", size = "md", ...rest }: ButtonProps) {
-  return <button className={clsx(base, variants[variant], sizes[size], className)} {...rest} />;
-}
+const sizeMap: Record<NonNullable<ButtonProps["size"]>, string> = {
+  sm: "px-3 py-1.5 text-sm rounded-xl",
+  md: "px-4 py-2 text-sm rounded-xl",
+  lg: "px-5 py-2.5 text-base rounded-2xl",
+};
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = "primary", size = "md", ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={clsx(
+          "inline-flex items-center justify-center border border-transparent font-medium transition active:scale-[0.98]",
+          variantMap[variant],
+          sizeMap[size],
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+Button.displayName = "Button";
+
+export default Button;
