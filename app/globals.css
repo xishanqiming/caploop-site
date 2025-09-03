@@ -111,3 +111,5 @@ h1{
 
 /* 通用卡片轻阴影 */
 .card{ @apply rounded-2xl border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.05)] bg-white; }
+
+html{scroll-behavior:smooth}

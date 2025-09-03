@@ -1,61 +1,27 @@
 "use client";
 import Link from "next/link";
-import useScrollSpy from "@/hooks/useScrollSpy";
-import { usePathname } from "next/navigation";
-
-const sections = [
-  { id: "hero", label: "首页" },
-  { id: "ecosystem", label: "Tokenization" },
-  { id: "lifecycle", label: "How It Works" },
-  { id: "usp", label: "优势" },
-  { id: "team", label: "团队" },
-  { id: "contact", label: "联系" },
-];
 
 export default function Nav() {
-  const pathname = usePathname();
-  const activeId = useScrollSpy(sections.map((s) => s.id), { rootMargin: "-40% 0px -55% 0px" });
-
+  const items = [
+    { href: "#thesis", label: "投资理念" },
+    { href: "#structure", label: "基金架构" },
+    { href: "#advantages", label: "竞争优势" },
+    { href: "#process", label: "投资流程" },
+    { href: "#team", label: "团队背景" },
+    { href: "#contact", label: "联系方式" },
+  ];
   return (
-    <header className="sticky top-0 z-50 bg-white/75 backdrop-blur border-b border-gray-100">
-      <div className="container mx-auto max-w-[1200px] px-4 h-14 flex items-center justify-between">
-        {/* 点击 Logo 永远回到首页顶部 */}
-        <Link href="/" prefetch={false} className="font-semibold text-lg tracking-tight">
-          Caploop
-        </Link>
-
-        <nav className="hidden sm:flex items-center gap-5">
-          {sections.map((s) => {
-            // 在任何路由使用绝对片段："/#id"
-            const href = `/#${s.id}`;
-            // 只有在首页才高亮当前滚动区块；在子页不高亮
-            const active = pathname === "/" && activeId === s.id;
-            return (
-              <Link
-                key={s.id}
-                href={href}
-                prefetch={false}
-                className={`text-sm transition ${active ? "text-black font-semibold" : "text-gray-600 hover:text-black"}`}
-              >
-                {s.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="hidden sm:block">
-          <Link href="/#contact" prefetch={false}
-            className="inline-flex items-center rounded-xl px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 border border-blue-600 transition">
-            Join / 联系我们
-          </Link>
-        </div>
-
-        {/* 极小屏仅保留 CTA，不再显示“菜单”按钮 */}
-        <Link href="/#contact" prefetch={false}
-          className="sm:hidden inline-flex items-center rounded-xl px-3 py-1.5 text-sm text-white bg-blue-600 border border-blue-600">
-          联系
-        </Link>
-      </div>
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-slate-200">
+      <nav className="mx-auto max-w-6xl px-6 h-14 flex items-center justify-between">
+        <Link href="/" className="font-extrabold">Caploop</Link>
+        <ul className="hidden md:flex gap-5 text-sm">
+          {items.map((it) => (
+            <li key={it.href}>
+              <a href={it.href} className="hover:text-indigo-700">{it.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   );
 }

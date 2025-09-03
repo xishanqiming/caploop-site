@@ -1,46 +1,53 @@
+"use client";
+
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-24 bg-[#0B1420] text-[#C6D0DB]">
-      <div className="container mx-auto max-w-[1200px] px-4 py-14">
-        <div className="grid gap-10 md:grid-cols-4">
-          <div>
-            <div className="text-2xl font-semibold text-white">Caploop</div>
-            <p className="mt-3 text-sm text-[#8FA0B4]">
-              Growth → Valuation → Capital. A Luxembourg-based AI-driven fund platform.
-            </p>
-          </div>
-
-          <div>
-            <div className="text-white font-semibold">Platform</div>
-            <ul className="mt-4 space-y-3">
-              {/* 关键改动：使用“绝对路径 + hash”返回首页并定位到对应区块 */}
-              <li><Link className="hover:underline" href="/#ecosystem">Tokenization</Link></li>
-              <li><Link className="hover:underline" href="/#lifecycle">How It Works</Link></li>
-              <li><Link className="hover:underline" href="/#usp">Why Caploop</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="text-white font-semibold">Legal</div>
-            <ul className="mt-4 space-y-3">
-              <li><Link className="hover:underline" href="/privacy" target="_blank" rel="noopener">隐私政策</Link></li>
-              <li><Link className="hover:underline" href="/terms" target="_blank" rel="noopener">使用条款</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="text-white font-semibold">Contact</div>
-            <ul className="mt-4 space-y-3">
-              <li>info@caploop.lu</li>
-              <li>Luxembourg, LU</li>
-            </ul>
-          </div>
+    <footer className="bg-[#0F1A24] text-neutral-300">
+      <div className="mx-auto w-full max-w-6xl px-6 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
+        {/* Brand */}
+        <div>
+          <h3 className="text-3xl font-semibold text-white mb-4">Caploop</h3>
+          <p className="leading-7">
+            Growth → Valuation → Capital. A Luxembourg-based AI-driven fund platform.
+          </p>
         </div>
 
-        <div className="mt-10 text-xs text-[#7890A8]">
-          © {new Date().getFullYear()} Caploop. All rights reserved.
+        {/* Platform：改为五个锚点，指向页面模块 */}
+        <div>
+          <h4 className="text-xl font-semibold text-white mb-4">Platform</h4>
+          <ul className="space-y-3">
+            <li><a href="#thesis" className="hover:text-white">投资理念</a></li>
+            <li><a href="#structure" className="hover:text-white">基金架构</a></li>
+            <li><a href="#advantages" className="hover:text-white">竞争优势</a></li>
+            <li><a href="#process" className="hover:text-white">投资流程</a></li>
+            <li><a href="#team" className="hover:text-white">团队背景</a></li>
+          </ul>
+        </div>
+
+        {/* Legal */}
+        <div>
+          <h4 className="text-xl font-semibold text-white mb-4">Legal</h4>
+          <ul className="space-y-3">
+            <li><Link href="/privacy" className="hover:text-white">隐私政策</Link></li>
+            <li><Link href="/terms" className="hover:text-white">使用条款</Link></li>
+          </ul>
+        </div>
+
+        {/* Contact（仅文字，不渲染 CTA 卡片） */}
+        <div>
+          <h4 className="text-xl font-semibold text-white mb-4">Contact</h4>
+          <ul className="space-y-3">
+            <li><a href="mailto:info@caploop.lu" className="hover:text-white">info@caploop.lu</a></li>
+            <li>Luxembourg, LU</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="mx-auto w-full max-w-6xl px-6 py-6 text-sm text-neutral-400">
+          © 2025 Caploop. All rights reserved.
         </div>
       </div>
     </footer>
