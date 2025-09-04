@@ -3,10 +3,8 @@
 export default function Home() {
   return (
     <main className="min-h-dvh bg-white text-slate-900">
-<span id="idea" className="block -mt-24 pt-24"></span>
-      {/* ===== 导航锚点：投资理念 ===== */}
+      {/* ===== 投资理念 ===== */}
       <section id="thesis" className="mx-auto max-w-5xl px-6 py-16">
-<span id="idea" className="block -mt-24 pt-24"></span>
         <h2 className="text-3xl md:text-4xl font-extrabold mb-6">投资理念</h2>
 
         <h3 className="text-2xl md:text-3xl font-bold text-red-700 mb-6">Caploop基金平台</h3>
@@ -54,14 +52,10 @@ export default function Home() {
         <h2 className="text-3xl md:text-4xl font-extrabold mb-8">竞争优势</h2>
 
         <div className="space-y-6">
-          <AdvItem index="1" title="AI驱动投资决策"
-                   text="多模型AI估值系统结合行业数据库，提供客观、精准的投资分析。" />
-          <AdvItem index="2" title="系统化投后管理"
-                   text="内设Venture Studio，提供陪跑式孵化服务与数据驱动增长策略，持续提升企业价值。" />
-          <AdvItem index="3" title="创新退出机制"
-                   text="支持传统M&A/IPO及Token化资产退出，拓宽流动性选择。" />
-          <AdvItem index="4" title="生态协同效应"
-                   text="整合增长引擎与估值平台资源，支持企业从“盈利能力提升”到“估值体系建立”的全链路成长。" />
+          <AdvItem index="1" title="AI驱动投资决策" text="多模型AI估值系统结合行业数据库，提供客观、精准的投资分析。" />
+          <AdvItem index="2" title="系统化投后管理" text="内设Venture Studio，提供陪跑式孵化服务与数据驱动增长策略，持续提升企业价值。" />
+          <AdvItem index="3" title="创新退出机制" text="支持传统M&A/IPO及Token化资产退出，拓宽流动性选择。" />
+          <AdvItem index="4" title="生态协同效应" text="整合增长引擎与估值平台资源，支持企业从“盈利能力提升”到“估值体系建立”的全链路成长。" />
         </div>
       </section>
 
@@ -69,9 +63,7 @@ export default function Home() {
       <section id="process" className="mx-auto max-w-5xl px-6 py-16">
         <h2 className="text-3xl md:text-4xl font-extrabold mb-8">投资流程</h2>
 
-        <p className="text-lg mb-6">
-          项目筛选 → AI辅助估值 → 投资决策 → 孵化陪跑 → 持续支持 → 多元退出
-        </p>
+        <p className="text-lg mb-6">项目筛选 → AI辅助估值 → 投资决策 → 孵化陪跑 → 持续支持 → 多元退出</p>
 
         <div className="grid md:grid-cols-3 gap-4 mb-6">
           <FlowCard title="智能筛选" text="AI算法识别高潜力项目" />
@@ -98,9 +90,7 @@ export default function Home() {
 
         <div className="rounded-2xl bg-amber-50 p-6 md:p-8 mb-8">
           <h3 className="text-xl md:text-2xl font-extrabold mb-4">核心团队</h3>
-          <p className="text-lg mb-6">
-            核心团队来自知名投资机构、四大会计师事务所及科技公司，具备丰富投资管理、技术开发和估值建模经验。
-          </p>
+          <p className="text-lg mb-6">核心团队来自知名投资机构、四大会计师事务所及科技公司，具备丰富投资管理、技术开发和估值建模经验。</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="rounded-xl border border-amber-200 bg-white p-5">
               <h4 className="font-bold mb-2">专业资质</h4>
@@ -124,25 +114,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== 联系方式（底部三栏） ===== */}
+      {/* ===== 联系方式（Contact） ===== */}
       <section id="contact" className="w-full bg-gradient-to-r from-indigo-700 to-violet-700 text-white">
-  <h2 className="text-white/90 text-[22px] md:text-3xl font-semibold mb-6">联系方式</h2>
-        <div className="mx-auto max-w-6xl px-6 py-12 grid md:grid-cols-3 gap-6">
-          <ContactCard
-            title="投资人"
-            subtitle="成为LP合伙人"
-            button="预约深度交流"
-          />
-          <ContactCard
-            title="创业者"
-            subtitle="申请投资支持"
-            button="提交项目"
-          />
-          <ContactCard
-            title="合作伙伴"
-            subtitle="生态合作机会"
-            button="商务合作"
-          />
+        <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+          {/* 统一风格的模块标题（白色、半粗、合适字号） */}
+          <h2 className="text-white/90 text-[22px] md:text-3xl font-semibold tracking-tight mb-8">联系方式</h2>
+
+          {/* 三列卡片：投资人 / 创业者 / 合作伙伴 */}
+          <div className="grid gap-6 md:grid-cols-3">
+            <ContactCard title="投资人" subtitle="成为LP合伙人" buttonText="预约深度交流" href="#" />
+            <ContactCard title="创业者" subtitle="申请投资支持" buttonText="提交项目" href="#" />
+            <ContactCard title="合作伙伴" subtitle="生态合作机会" buttonText="商务合作" href="#" />
+          </div>
         </div>
       </section>
     </main>
@@ -172,14 +155,24 @@ function FlowCard({ title, text }: { title: string; text: string }) {
   );
 }
 
-function ContactCard({ title, subtitle, button }: { title: string; subtitle: string; button: string }) {
+// 修复类型：支持 buttonText 与可选 href
+function ContactCard({ title, subtitle, buttonText, href }: { title: string; subtitle: string; buttonText: string; href?: string }) {
   return (
     <div className="rounded-2xl bg-white/10 backdrop-blur p-6">
       <h3 className="text-2xl font-extrabold mb-2">{title}</h3>
       <p className="mb-4 opacity-90">{subtitle}</p>
-      <button className="rounded-xl bg-white text-indigo-700 px-4 py-2 font-semibold hover:opacity-90">
-        {button}
-      </button>
+      {href ? (
+        <a
+          href={href}
+          className="inline-block rounded-xl bg-white text-indigo-700 px-4 py-2 font-semibold hover:opacity-90"
+        >
+          {buttonText}
+        </a>
+      ) : (
+        <button className="rounded-xl bg-white text-indigo-700 px-4 py-2 font-semibold hover:opacity-90">
+          {buttonText}
+        </button>
+      )}
     </div>
   );
 }
