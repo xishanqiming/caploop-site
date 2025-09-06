@@ -1,1 +1,5 @@
-{ "tickets": "€200K–€2M", "stages": ["Pre-Seed", "Seed", "Series A"], "regions": ["EU", "CN", "SEA"] }
+{
+  "tickets": "€200K–€2M",
+  "stages": ["Pre-Seed", "Seed", "Series A"],
+  "regions": ["EU", "CN", "SEA"]
+}

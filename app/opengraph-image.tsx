@@ -25,6 +25,6 @@ export default async function OgImage() {
         </div>
       </div>
     ),
-    { ...size }
+    { ...size },
   );
 }

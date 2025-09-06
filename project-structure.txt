@@ -1,0 +1,92 @@
+.
+├── .env.local
+├── .gitignore
+├── README.md
+├── app
+│   ├── (sections)
+│   │   ├── contact
+│   │   │   ├── CTA.tsx
+│   │   │   └── Contact.tsx
+│   │   ├── ecosystem
+│   │   │   └── Ecosystem.tsx
+│   │   ├── hero
+│   │   │   └── Hero.tsx
+│   │   ├── lifecycle
+│   │   │   └── Lifecycle.tsx
+│   │   ├── structure
+│   │   │   └── Structure.tsx
+│   │   ├── team
+│   │   │   └── Team.tsx
+│   │   └── usp
+│   │       └── Usp.tsx
+│   ├── api
+│   │   └── contact
+│   │       └── route.ts
+│   ├── error.tsx
+│   ├── globals.css
+│   ├── globals.css.bak
+│   ├── layout.tsx
+│   ├── not-found.tsx
+│   ├── opengraph-image.tsx
+│   ├── page.tsx
+│   ├── page.tsx.bak
+│   ├── privacy
+│   │   └── page.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   └── terms
+│       └── page.tsx
+├── components
+│   ├── Badge.tsx
+│   ├── CTA.tsx
+│   ├── Card.tsx
+│   ├── ClientOnly.tsx
+│   ├── Contact.tsx
+│   ├── ContactCard.tsx
+│   ├── DownloadDialog.tsx
+│   ├── Footer.tsx
+│   ├── HashScroll.tsx
+│   ├── Nav.tsx
+│   ├── Reveal.tsx
+│   ├── Section.tsx
+│   └── ui
+│       └── Button.tsx
+├── content
+│   ├── contact.json
+│   ├── ecosystem.json
+│   ├── lifecycle.json
+│   ├── onepager.json
+│   ├── structure.json
+│   ├── team.json
+│   └── usp.json
+├── eslint.config.mjs
+├── hooks
+│   └── useScrollSpy.ts
+├── lib
+│   └── seo.ts
+├── next-env.d.ts
+├── next.config.js
+├── next.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── postcss.config.mjs
+├── project-structure.txt
+├── public
+│   ├── caploop-logo.svg
+│   ├── documents
+│   │   └── Caploop_Onepager_v202501.pdf
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── src
+│   └── app
+│       ├── favicon.ico
+│       ├── layout.tsx
+│       └── page.tsx
+├── tsconfig.json
+└── tsconfig.tsbuildinfo
+
+23 directories, 67 files

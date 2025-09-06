@@ -1,7 +1,15 @@
 export default function Section({
-  id, title, subtitle, center=false, children
+  id,
+  title,
+  subtitle,
+  center = false,
+  children,
 }: {
-  id: string; title: string; subtitle?: string; center?: boolean; children: React.ReactNode;
+  id: string;
+  title: string;
+  subtitle?: string;
+  center?: boolean;
+  children: React.ReactNode;
 }) {
   return (
     <section id={id} className="section">

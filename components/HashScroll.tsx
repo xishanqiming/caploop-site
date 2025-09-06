@@ -9,7 +9,10 @@ export default function HashScroll() {
       const el = document.getElementById(id);
       if (el) {
         // 等待首屏渲染完成后再滚动，避免水合时机差导致未命中
-        setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+        setTimeout(
+          () => el.scrollIntoView({ behavior: "smooth", block: "start" }),
+          0,
+        );
       }
     };
     // 首次进入（例如从 /privacy 跳到 /#ecosystem）

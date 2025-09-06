@@ -1,0 +1,13 @@
+<svg width="192" height="40" viewBox="0 0 192 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Caploop">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+  <!-- 右侧字标（蓝色） -->
+  <g transform="translate(48,7)" fill="#1D4ED8">
+    <path d="6-18 15-18 4 0 7 1 10 3l-2 4c-2-1-5-2-8-2-7 0-11 6-11 13s4 13 11 13c3 0 6-1 8-2l2 4c-3 2-6 3-10 3C6 36 0 28 0 18z"/>
+    <text x="32" y="23" font-size="22" font-family="Inter, ui-sans-serif, system-ui" font-weight="700">Caploop</text>
+  </g>
+</svg>

@@ -8,7 +8,7 @@ export default function Card({
     <div
       className={clsx(
         "border border-gray-100 bg-white rounded-2xl shadow-sm",
-        className
+        className,
       )}
     >
       {children}

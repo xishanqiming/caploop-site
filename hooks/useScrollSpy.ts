@@ -1,7 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export default function useScrollSpy(ids: string[], options?: IntersectionObserverInit) {
+export default function useScrollSpy(
+  ids: string[],
+  options?: IntersectionObserverInit,
+) {
   const [active, setActive] = useState<string>(ids[0] || "");
 
   useEffect(() => {
@@ -9,11 +12,14 @@ export default function useScrollSpy(ids: string[], options?: IntersectionObserv
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => !!el);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) setActive(entry.target.id);
-      });
-    }, options ?? { rootMargin: "-30% 0px -60% 0px", threshold: 0.01 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      options ?? { rootMargin: "-30% 0px -60% 0px", threshold: 0.01 },
+    );
 
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
